@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: profile
+  name: profile
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      io.kompose.service: profile
+  template:
+    metadata:
+      labels:
+        io.kompose.service: profile
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: work-node1
+      containers:
+      - command:
+        - profile
+        image: yz2297/hotel_reservation
+        imagePullPolicy: IfNotPresent
+        name: hotelreservation-profile
+        ports:
+        - containerPort: 8081
+          hostPort: 8081
+        volumeMounts:
+        - mountPath: /go/src/github.com/harlow/go-micro-services/config.json
+          name: profile-claim0
+      restartPolicy: Always
+      volumes:
+      - name: profile-claim0
+        hostPath:
+          path: /root/Go-operator-projects/hotelReservation-operator/original/hotelRes/config.json
+          type: FileOrCreate

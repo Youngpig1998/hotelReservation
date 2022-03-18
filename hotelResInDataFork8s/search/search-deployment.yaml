@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: search
+  name: search
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      io.kompose.service: search
+  template:
+    metadata:
+      labels:
+        io.kompose.service: search
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: data-node
+      containers:
+      - command:
+        - search
+        image: yz2297/hotel_reservation
+        imagePullPolicy: IfNotPresent
+        name: hotelreservation-search
+        ports:
+        - containerPort: 8082
+          hostPort: 8082
+        resources: {}
+        volumeMounts:
+        - mountPath: /go/src/github.com/harlow/go-micro-services/config.json
+          name: search-claim0
+      restartPolicy: Always
+      volumes:
+      - name: search-claim0
+        hostPath:
+          path: /root/Go-operator-projects/hotelReservation-operator/original/hotelRes/config.json
+          type: FileOrCreate
+
+

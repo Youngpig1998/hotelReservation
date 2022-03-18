@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: recommendation
+  name: recommendation
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      io.kompose.service: recommendation
+  template:
+    metadata:
+      labels:
+        io.kompose.service: recommendation
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: work-node1
+      containers:
+      - command:
+        - recommendation
+        image: yz2297/hotel_reservation
+        imagePullPolicy: IfNotPresent
+        name: hotelreservation-recommendation
+        ports:
+        - containerPort: 8085
+          hostPort: 8085
+        volumeMounts:
+        - mountPath: /go/src/github.com/harlow/go-micro-services/config.json
+          name: recommendation-claim0
+      restartPolicy: Always
+      volumes:
+      - name: recommendation-claim0
+        hostPath:
+          path: /root/Go-operator-projects/hotelReservation-operator/original/hotelRes/config.json
+          type: FileOrCreate

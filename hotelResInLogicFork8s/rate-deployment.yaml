@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: rate
+  name: rate
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      io.kompose.service: rate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: rate
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: work-node1
+      containers:
+      - command:
+        - rate
+        image: yz2297/hotel_reservation
+        imagePullPolicy: IfNotPresent
+        name: hotelreservation-rate
+        ports:
+        - containerPort: 8084
+          hostPort: 8084
+        volumeMounts:
+        - mountPath: /go/src/github.com/harlow/go-micro-services/config.json
+          name: rate-claim0
+      restartPolicy: Always
+      volumes:
+      - name: rate-claim0
+        hostPath:
+          path: /root/Go-operator-projects/hotelReservation-operator/original/hotelRes/config.json
+          type: FileOrCreate

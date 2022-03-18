@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: frontend
+  name: frontend
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      io.kompose.service: frontend
+  template:
+    metadata:
+      labels:
+        io.kompose.service: frontend
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: work-node1
+      containers:
+      - command:
+        - frontend
+        image: yz2297/hotel_reservation
+        imagePullPolicy: IfNotPresent
+        name: hotelreservation-frontend
+        ports:
+        - containerPort: 5000
+          hostPort: 5000
+        volumeMounts:
+        - mountPath: /go/src/github.com/harlow/go-micro-services/config.json
+          name: frontend-claim0
+      restartPolicy: Always
+      volumes:
+      - name: frontend-claim0
+        hostPath:
+          path: /root/Go-operator-projects/hotelReservation-operator/original/hotelRes/config.json
+          type: FileOrCreate
+        

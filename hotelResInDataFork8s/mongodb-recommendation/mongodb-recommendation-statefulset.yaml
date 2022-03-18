@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    io.kompose.service: mongodb-recommendation
+  name: mongodb-recommendation
+spec:
+  serviceName: "mongodb-recommendation"
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mongodb-recommendation
+  volumeClaimTemplates:
+  - metadata:
+      name: recommendation 
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "managed-nfs-storage"
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi 
+  template:
+    metadata:
+     labels:
+       io.kompose.service: mongodb-recommendation
+    spec:
+     nodeSelector:
+        kubernetes.io/hostname: data-node
+     serviceAccount: nfs-provisioner
+     containers:
+      - image: mongo
+        imagePullPolicy: IfNotPresent
+        name: hotelreservation-mongodb-recommendation
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - mountPath: /data/db
+          name: recommendation

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: memcached-profile
+  name: memcached-profile
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: memcached-profile
+  template:
+    metadata:
+      labels:
+        io.kompose.service: memcached-profile
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: data-node
+      containers:
+      - env:
+        - name: MEMCACHED_CACHE_SIZE
+          value: "2048"
+        - name: MEMCACHED_THREADS
+          value: "8"
+        image: memcached
+        imagePullPolicy: IfNotPresent
+        name: hotelreservation-memcached-profile
+        ports:
+        - containerPort: 11211
+        resources: {}
+      restartPolicy: Always
