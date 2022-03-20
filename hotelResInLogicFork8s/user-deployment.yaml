@@ -18,6 +18,23 @@ spec:
     spec:
       nodeSelector:
         kubernetes.io/hostname: work-node1
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000321000
+      initContainers:
+      - name: configwriter
+        securityContext:    
+          runAsNonRoot: true
+        env:
+        - name: LOGICNODEIP
+          value: 172.16.84.130
+        - name: DATANODEIP
+          value: 172.16.84.128
+        image: youngpig/configwriter:latest
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: varconfig
+          mountPath: /var/configFiles
       containers:
       - command:
         - user
@@ -27,12 +44,16 @@ spec:
         ports:
         - containerPort: 8086
           hostPort: 8086
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "sleep 5"]
+        securityContext:
+          runAsNonRoot: true
         volumeMounts:
-        - mountPath: /go/src/github.com/harlow/go-micro-services/config.json
-          name: user-claim0
+        - mountPath: /go/src/github.com/harlow/go-micro-services
+          name: varconfig
       restartPolicy: Always
       volumes:
-      - name: user-claim0
-        hostPath:
-          path: /root/Go-operator-projects/hotelReservation-operator/original/hotelRes/config.json
-          type: FileOrCreate
+      - name: varconfig
+        emptyDir: {}
