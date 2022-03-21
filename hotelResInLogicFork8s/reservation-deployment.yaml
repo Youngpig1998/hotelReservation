@@ -38,7 +38,7 @@ spec:
       containers:
       - command:
         - reservation
-        image: yz2297/hotel_reservation
+        image: youngpig/hotel_reservation
         imagePullPolicy: IfNotPresent
         name: hotelreservation-reservation
         ports:
@@ -51,7 +51,7 @@ spec:
         securityContext:
           runAsNonRoot: true
         volumeMounts:
-        - mountPath: /go/src/github.com/harlow/go-micro-services
+        - mountPath: /go/src/github.com/harlow/go-micro-services/config
           name: varconfig
       restartPolicy: Always
       volumes:
