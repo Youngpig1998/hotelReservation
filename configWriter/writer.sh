@@ -1,4 +1,5 @@
 #! /bin/sh
+mkdir -p /var/configFiles
 touch /var/configFiles/config.json
 
 echo { >> /var/configFiles/config.json

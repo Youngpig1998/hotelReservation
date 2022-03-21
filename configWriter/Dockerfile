@@ -1,9 +1,8 @@
-FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
+FROM redhat/ubi8-minimal:latest
 
 
-COPY . /var/configFiles
 COPY writer.sh /
 
-RUN chmod 777 /writer.sh
+RUN chmod +x /writer.sh
 
 ENTRYPOINT ["/writer.sh"]
