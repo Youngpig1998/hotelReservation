@@ -18,7 +18,7 @@ import (
 )
 
 func main() {
-	jsonFile, err := os.Open("config.json")
+	jsonFile, err := os.Open("config/config.json")
 	if err != nil {
 		fmt.Println(err)
 	}
