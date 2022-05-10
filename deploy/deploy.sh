@@ -1,10 +1,4 @@
 #!/bin/bash
-#deploy nfs-client-provisioner
-kubectl apply -f ./storageclass/clusterrole.yaml
-kubectl apply -f ./storageclass/clusterrolebinding.yaml
-kubectl apply -f ./storageclass/serviceaccount.yaml
-kubectl apply -f ./storageclass/deployment-nfs.yaml
-kubectl apply -f ./storageclass/nfs-class.yaml
 
 #deploy data services
 kubectl apply -f ./hotelResInDataFork8s/memcached-profile/.
