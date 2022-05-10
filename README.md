@@ -21,6 +21,8 @@ Supported actions:
 
 Have Installed the nfs-client-provisioner,it will create the pv and pvc we need.
 
+Note the IP address in the deployment yaml
+
 ```shell
 kubectl apply -f $(pwd)/deploy/storageclass/.
 ```
