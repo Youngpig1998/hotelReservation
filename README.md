@@ -8,7 +8,7 @@ Supported actions:
 * Recommend hotels based on user provided metrics
 * Place reservations
 
-![arch](C:\Users\Young\Desktop\云计算\Kubernates\fan\hotelRes\doc\images\arch.png)
+![arch](doc\images\arch.png)
 
 ## Preqreqs
 
