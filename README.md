@@ -8,7 +8,7 @@ Supported actions:
 * Recommend hotels based on user provided metrics
 * Place reservations
 
-![arch](doc\images\arch.png)
+<img src="doc/images/arch.png"  style="zoom:100%;" />
 
 ## Preqreqs
 
