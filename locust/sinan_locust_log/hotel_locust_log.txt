@@ -1,0 +1,11 @@
+[2022-05-10 14:19:10,984] njtech-CVN-Z690-GAMING-FROZEN/INFO/root: Waiting for workers to be ready, 0 of 1 connected
+[2022-05-10 14:19:11,024] njtech-CVN-Z690-GAMING-FROZEN/INFO/locust.runners: Client 'njtech-CVN-Z690-GAMING-FROZEN_9671ec454c6e4363af72dc2f9d66da33' reported as ready. Currently 1 clients ready to swarm.
+[2022-05-10 14:19:11,986] njtech-CVN-Z690-GAMING-FROZEN/INFO/locust.runners: Sending hatch jobs of 1 users and 1.00 hatch rate to 1 ready clients
+[2022-05-10 14:19:11,987] njtech-CVN-Z690-GAMING-FROZEN/INFO/locust.main: Run time limit set to 80 seconds
+[2022-05-10 14:19:11,987] njtech-CVN-Z690-GAMING-FROZEN/INFO/locust.main: Starting Locust 1.0.2
+[2022-05-10 14:20:31,986] njtech-CVN-Z690-GAMING-FROZEN/INFO/locust.main: Time limit reached. Stopping Locust.
+[2022-05-10 14:20:31,987] njtech-CVN-Z690-GAMING-FROZEN/INFO/locust.runners: Client 'njtech-CVN-Z690-GAMING-FROZEN_9671ec454c6e4363af72dc2f9d66da33' quit. Currently 0 clients connected.
+[2022-05-10 14:20:31,987] njtech-CVN-Z690-GAMING-FROZEN/INFO/locust.runners: The last worker quit, stopping test.
+[2022-05-10 14:20:32,488] njtech-CVN-Z690-GAMING-FROZEN/INFO/locust.main: Shutting down (exit code 0), bye.
+[2022-05-10 14:20:32,488] njtech-CVN-Z690-GAMING-FROZEN/INFO/locust.main: Cleaning up runner...
+[2022-05-10 14:20:32,989] njtech-CVN-Z690-GAMING-FROZEN/INFO/locust.main: Running teardowns...
